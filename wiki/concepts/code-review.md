@@ -3,8 +3,8 @@ type: concept
 title: Code Review
 created: 2026-07-03
 updated: 2026-07-03
-sources: [20260703-google-code-review.md]
-tags: [code-review, engineering-practices]
+sources: [20260703-google-code-review.md, 20260703-artificial-adventures.md]
+tags: [code-review, engineering-practices, ai-coding]
 status: current
 ---
 
@@ -37,8 +37,20 @@ Google의 엔지니어링 실천 가이드에 따르면 코드 리뷰의 핵심 
 요청은 실제로 지켜지지 않는 경우가 많아 권장되지 않는다
 (source: [[sources/2026-07-03-google-code-review]]).
 
+한편 사람이 아니라 AI(LLM)가 리뷰어 역할을 하는 사례도 보고된다. 한 개인 개발자는
+"git diff main을 리뷰해서 버그를 찾아줘" 정도의 단순한 프롬프트만으로도 지금까지
+AI 도구에서 얻은 것 중 "가장 압도적으로 가치 있는" 용도가 코드 리뷰였다고 평가하며,
+frontier 모델(opus)이 fuzzer도 놓친 double-free 버그를 발견한 사례를 든다. 다만
+저가형 모델은 확신에 찬 허풍을 자주 내놓고, 검증은 여전히 사람이 상세히 읽어야
+한다고 지적한다
+(source: [[sources/2026-07-03-artificial-adventures]]; 자세한 내용은
+[[concepts/ai-coding-assistants]]).
+
 ## Positions and disagreements
-아직 다른 소스가 없어 기록된 상반된 입장은 없다.
+아직 기록된 상반된 입장은 없다. Google 가이드는 사람 리뷰어의 표준·속도·태도를
+다루고, artificial-adventures 소스는 AI가 리뷰어 역할을 하는 사례를 다뤄 서로
+다른 각도지만 상충하지는 않는다.
 
 ## See also
-(관련 개념 페이지 없음 — 아직 이 소스 하나뿐)
+- [[concepts/ai-coding-assistants]] — AI 코딩 도구 전반의 효용과 한계(코드 리뷰는
+  그 중 한 활용처)
