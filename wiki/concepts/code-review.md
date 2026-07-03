@@ -3,7 +3,7 @@ type: concept
 title: Code Review
 created: 2026-07-03
 updated: 2026-07-03
-sources: [20260703-google-code-review.md, 20260703-artificial-adventures.md]
+sources: [20260703-google-code-review.md, 20260703-artificial-adventures.md, 20260703-rules-engineering-leaderhsip.md]
 tags: [code-review, engineering-practices, ai-coding]
 status: current
 ---
@@ -46,11 +46,22 @@ frontier 모델(opus)이 fuzzer도 놓친 double-free 버그를 발견한 사례
 (source: [[sources/2026-07-03-artificial-adventures]]; 자세한 내용은
 [[concepts/ai-coding-assistants]]).
 
+조직 규모에서 AI 리뷰어를 상시 운영에 편입한 사례도 보고된다. Imprint에서는 "1차
+코드 리뷰를 변경을 구현한 것과 같은 하네스가, 그 변경을 작성할 때 쓴 맥락을 비운
+상태로 수행"해 사람은 더 높은 가치의 피드백에 집중하도록 한다. 저자는 좋은 하네스의
+1차 리뷰가 사람의 1차 리뷰보다 빠르고 효과적이라고 평가하되, 고위험 영역은 여전히
+사람이 처리해야 한다고 본다
+(source: [[sources/2026-07-03-revised-rules-of-engineering-leadership]]; 자세한
+내용은 [[concepts/engineering-leadership]]).
+
 ## Positions and disagreements
 아직 기록된 상반된 입장은 없다. Google 가이드는 사람 리뷰어의 표준·속도·태도를
-다루고, artificial-adventures 소스는 AI가 리뷰어 역할을 하는 사례를 다뤄 서로
-다른 각도지만 상충하지는 않는다.
+다루고, artificial-adventures와 revised-rules-of-engineering-leadership 두 소스는
+AI(하네스)가 리뷰어 역할을 하는 사례(각각 개인·조직 규모)를 다뤄 서로 다른
+각도지만 상충하지는 않는다.
 
 ## See also
 - [[concepts/ai-coding-assistants]] — AI 코딩 도구 전반의 효용과 한계(코드 리뷰는
   그 중 한 활용처)
+- [[concepts/engineering-leadership]] — 하네스 기반 1차 코드 리뷰를 조직의 프로세스
+  자동화 원칙 중 하나로 다룬다.
