@@ -20,3 +20,9 @@ wiki/concepts/ai-coding-assistants (조직 규모의 하네스 채택·마이그
 추가). index.md, overview.md 갱신. 충돌 없음 — 개인 개발자 관점(artificial-adventures)과
 조직 리더십 관점(이 소스) 모두 "검증 비용이 싼 영역에서 AI 도구가 강하다"는 같은
 결론으로 수렴.
+
+## [2026-07-10] schema | research-workspace
+Updated CLAUDE.md to define `research/<topic-slug>/` as the workspace for agent-conducted
+topic research. Added the research directory layout, provenance rules, operation flow,
+index and log bookkeeping, and the `research:` commit prefix. Research findings remain
+separate from established wiki claims until promoted through the normal wiki workflow.

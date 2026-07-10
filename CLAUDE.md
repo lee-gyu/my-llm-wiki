@@ -16,6 +16,12 @@ formats live here and only here. Operation-specific procedures live in skills (s
 ├── CLAUDE.md            # this file (the schema) — edit only when the human approves
 ├── raw/                 # source documents — READ-ONLY, never modify or delete
 │   └── assets/          # images belonging to sources
+├── research/            # agent-conducted research, organized by topic
+│   ├── index.md         # catalog of research topics, status, and scope
+│   └── <topic-slug>/
+│       ├── README.md     # research question, scope, synthesis, and open questions
+│       ├── sources.md    # source ledger with URLs and access dates
+│       └── notes/        # optional source-specific notes and excerpts
 └── wiki/
     ├── index.md         # catalog of all pages (content-oriented; the query router)
     ├── log.md           # append-only operation log (chronological)
@@ -32,30 +38,63 @@ These apply during **every** operation, no exceptions:
 
 1. **Never modify or delete anything under `raw/`.** It is the immutable source of
    truth. Scratch/extraction output goes to `/tmp/` or `.scratch/`, never `raw/`.
-2. **Never delete or merge wiki pages unilaterally.** Propose it; act only on explicit
+2. **Keep agent research under `research/<topic-slug>/`.** Do not place researched
+   web material in `raw/`, and do not treat a research synthesis as an established wiki
+   claim until it has gone through the normal wiki provenance process.
+3. **Never delete or merge wiki pages unilaterally.** Propose it; act only on explicit
    approval.
-3. **Every factual claim needs provenance.** Cite the source page it came from, e.g.
+4. **Every factual claim needs provenance.** In the wiki, cite the source page it came
+   from, e.g.
    `(source: [[sources/2026-07-01-some-article]])`. If you cannot trace a claim to a
    source in this repo, do not write it. Your own background knowledge is not a source —
    if it seems relevant, say so in chat and ask before adding it, marking it
-   `(source: model knowledge, unverified)`.
-4. **Never silently overwrite a claim.** When new information contradicts an existing
+   `(source: model knowledge, unverified)`. In research files, cite the corresponding
+   entry in the topic's `sources.md` for every substantive factual claim.
+5. **Never silently overwrite a claim.** When new information contradicts an existing
    page, keep both and record the conflict (see "Handling contradictions").
-5. **Do not scan the whole wiki to answer a question.** Read `wiki/index.md` first,
+6. **Do not scan the whole wiki to answer a question.** Read `wiki/index.md` first,
    pick the relevant pages, read only those. (Lint is the one sanctioned exception.)
-6. **One git commit per operation** (per-source for batch ingests), message prefixed
-   `ingest:`, `query:`, `lint:`, or `schema:`. Commit only when the operation is fully
-   finished — pages, index, and log all consistent — so every commit is a valid
-   snapshot and any operation can be reverted in isolation.
+7. **One git commit per operation** (per-source for batch ingests), message prefixed
+   `ingest:`, `research:`, `query:`, `lint:`, or `schema:`. Commit only when the
+   operation is fully finished — pages, indexes, and log all consistent — so every
+   commit is a valid snapshot and any operation can be reverted in isolation.
 
 ## Operations
 
 | Operation | Trigger | Where the procedure lives |
 |---|---|---|
 | **Ingest** | new file in `raw/` + request to file/process it | `wiki-ingest` skill |
+| **Research** | request to investigate a topic or gather external material | below (no skill) |
 | **Query** | any question about the wiki's subject matter | below (no skill) |
 | **Lint** | "lint" / "health check" | below, until `wiki-lint` skill exists |
 | **Schema change** | recurring workflow friction | below |
+
+### Research
+
+Use this operation when the human asks to investigate a topic, such as "research the
+Critical Decision Method (CDM)." Research is an evidence-gathering workspace, not a
+shortcut for adding unreviewed claims to the wiki.
+
+1. Read `research/index.md` first if it exists. Choose a short, stable, kebab-case ASCII
+   topic slug (`cdm` for Critical Decision Method), and reuse an existing topic directory
+   for follow-up research instead of creating a near-duplicate.
+2. Create or update `research/<topic-slug>/README.md` with the original request, scope,
+   research date, status, synthesized findings, conflicts, limitations, and open
+   questions. Preserve earlier findings when new evidence disagrees; annotate the
+   conflict instead of silently replacing them.
+3. Maintain `research/<topic-slug>/sources.md` as a source ledger. Assign stable IDs
+   (`S1`, `S2`, ...), and record each source's title, author or publisher, publication
+   date when known, URL, access date, and what it supports. Prefer primary and
+   authoritative sources; use multiple independent sources for consequential claims.
+4. Cite source IDs inline in the synthesis, for example `[S1]` or `[S1, S3]`. Put
+   source-specific detail in `notes/` when useful, clearly distinguishing quotations
+   from paraphrases. Do not copy entire copyrighted works into the repository.
+5. Update `research/index.md` with one line for the topic: link, discriminating summary,
+   status, and last-researched date. Append a `research` entry to `wiki/log.md` describing
+   what was created or updated.
+6. Do not automatically promote research findings into `wiki/`. If the human asks to
+   incorporate them, apply the wiki's normal source-page, provenance, contradiction,
+   index, and log rules as a separate operation.
 
 ### Query
 
@@ -150,4 +189,4 @@ Append-only; never edit past entries. Every entry starts with a grep-able header
 Created sources/2026-07-03-llm-wiki-gist, updated 4 entity pages, 1 new conflict flagged.
 ```
 
-Entry types: `ingest`, `query`, `lint`, `schema`.
+Entry types: `ingest`, `research`, `query`, `lint`, `schema`.
