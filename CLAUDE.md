@@ -64,37 +64,10 @@ These apply during **every** operation, no exceptions:
 | Operation | Trigger | Where the procedure lives |
 |---|---|---|
 | **Ingest** | new file in `raw/` + request to file/process it | `wiki-ingest` skill |
-| **Research** | request to investigate a topic or gather external material | below (no skill) |
+| **Research** | request to investigate a topic or gather external material | `research` skill |
 | **Query** | any question about the wiki's subject matter | below (no skill) |
 | **Lint** | "lint" / "health check" | below, until `wiki-lint` skill exists |
 | **Schema change** | recurring workflow friction | below |
-
-### Research
-
-Use this operation when the human asks to investigate a topic, such as "research the
-Critical Decision Method (CDM)." Research is an evidence-gathering workspace, not a
-shortcut for adding unreviewed claims to the wiki.
-
-1. Read `research/index.md` first if it exists. Choose a short, stable, kebab-case ASCII
-   topic slug (`cdm` for Critical Decision Method), and reuse an existing topic directory
-   for follow-up research instead of creating a near-duplicate.
-2. Create or update `research/<topic-slug>/README.md` with the original request, scope,
-   research date, status, synthesized findings, conflicts, limitations, and open
-   questions. Preserve earlier findings when new evidence disagrees; annotate the
-   conflict instead of silently replacing them.
-3. Maintain `research/<topic-slug>/sources.md` as a source ledger. Assign stable IDs
-   (`S1`, `S2`, ...), and record each source's title, author or publisher, publication
-   date when known, URL, access date, and what it supports. Prefer primary and
-   authoritative sources; use multiple independent sources for consequential claims.
-4. Cite source IDs inline in the synthesis, for example `[S1]` or `[S1, S3]`. Put
-   source-specific detail in `notes/` when useful, clearly distinguishing quotations
-   from paraphrases. Do not copy entire copyrighted works into the repository.
-5. Update `research/index.md` with one line for the topic: link, discriminating summary,
-   status, and last-researched date. Append a `research` entry to `wiki/log.md` describing
-   what was created or updated.
-6. Do not automatically promote research findings into `wiki/`. If the human asks to
-   incorporate them, apply the wiki's normal source-page, provenance, contradiction,
-   index, and log rules as a separate operation.
 
 ### Query
 
