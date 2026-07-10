@@ -26,3 +26,9 @@ Updated CLAUDE.md to define `research/<topic-slug>/` as the workspace for agent-
 topic research. Added the research directory layout, provenance rules, operation flow,
 index and log bookkeeping, and the `research:` commit prefix. Research findings remain
 separate from established wiki claims until promoted through the normal wiki workflow.
+
+## [2026-07-10] research | critical-decision-method
+Created research/critical-decision-method with a 13-source ledger, evidence notes, and a
+Korean synthesis covering CDM's origins, four-sweep interview process, probes, analysis,
+applications, evidence strength, conflicts, and validity limitations. Added the topic to
+research/index.md. Wiki promotion was not performed.
